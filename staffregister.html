@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Staff Register</title>
+	<script type="text/javascript" src="jquery.min.js"></script>
+	<script type="text/javascript" >	
+		$(document).ready(function(){
+			getdata();
+			$("#divedit").hide();
+			$("#btnregister").click(function(){
+				var name=$("#name").val();
+				var age=$("#age").val();
+				var address=$("#address").val();
+				var email=$("#email").val();
+				var gender=$("input[name='gender']:checked").val();
+
+				var student={
+
+					name:name,
+					age:age,
+					address:address,
+					email:email,
+					gender:gender,
+
+
+				}
+//console.log(Student);
+
+var studentlist=localStorage.getItem("student");
+//console.log(Studentlist);
+var mystudentArray;
+if (studentlist==null){
+	mystudentArray=[];
+}else{
+	mystudentArray=JSON.parse(studentlist);
+}
+mystudentArray.push(student);
+//console.log(mystudentArray);
+//localStorage ka string only
+var stringstudent=JSON.stringify(mystudentArray);
+//console.log(stringstudent);
+localStorage.setItem("student",stringstudent);
+getdata();
+})
+
+
+			function getdata(){
+				var studentlist=localStorage.getItem("student");
+//alert("ok");
+//console.log(studentlist)
+if(studentlist){
+	var mystudentArray=JSON.parse(studentlist);
+	//console.log(mystudentArray);
+	var html="";
+	var j=1;
+	mystudentArray.forEach(function(v,i){
+		//statements
+		html+=`
+		<tr>
+		<td>${j++}</td>
+		<td>${v.name}</td>
+		<td>${v.age}</td>
+		<td>${v.address}</td>
+		<td>${v.email}</td>		
+		<td>${v.gender}</td>
+		
+		<td>
+		<button class="btndelete" data-id="${i}">Delete</button>
+		<button class="btnedit" data-id="${i}">Edit</button></td>
+		</tr>
+		`
+	});
+	$("#mytbody").html(html);
+
+}
+}
+
+
+$("#mytbody").on('click', '.btndelete',function(){
+//alert("ok");
+var id=$(this).data('id');
+//console.log(id);
+var studentlist=localStorage.getItem("student");
+if(studentlist){
+	var mystudentArray=JSON.parse(studentlist);
+		//console.log( mystudentArray[id]);
+		mystudentArray.splice(id,1);
+		var stringstudent=JSON.stringify(mystudentArray);
+		localStorage.setItem("student",stringstudent);
+		getdata();
+	}
+
+
+})
+$("#mytbody").on('click', '.btnedit',function(){
+
+	$("#divregister").hide();
+	$("#divedit").show();
+	var id=$(this).data('id');
+//console.log(id);
+var studentlist=localStorage.getItem("student");
+if (studentlist){
+	var mystudentArray=JSON.parse(studentlist);
+	var mystudent=mystudentArray[id];
+
+	$("#ename").val(mystudent.name)
+	$("#eage").val(mystudent.age)
+	$("#eaddress").val(mystudent.address)
+	
+	var gender=mystudent.gender;
+	if(gender=="male"){
+
+		$("#emale").prop("checked", "checked");
+	}else{
+		$("#efemale").prop("checked", "checked");
+	}
+	$("#email").val(mystudent.email)
+
+
+
+}
+
+})
+})
+</script>
+</head>
+<body>
+	<!-- //registerform -->
+	<div id="divregister">
+		<h1>Register Form</h1>
+		Name:<input type="text" name="" id="name"><br>
+		Age:<input type="text" name="" id="age"><br>
+		Address:<input type="text" name="" id="address"><br>
+		Email:<input type="text" name="" id="email"><br>
+		Gender:<br>
+		Male:<input type="radio" name="gender" value="male"><br>
+		Female:<input type="radio" name="gender" value="female"><br>
+
+
+		<button id="btnregister" >Register</button>	
+	</div>
+	<!-- //editform -->
+	<div id="divedit">
+		<h1>Edit Form</h1>
+		Name:<input type="text" name="" id="ename"><br>
+		Age:<input type="text" name="" id="eage"><br>
+		Address:<input type="text" name="" id="eaddress"><br>
+		Email:<input type="text" name="" id="email"><br>
+		Gender:<br>
+		Male:<input type="radio" name="gender" value="male" id="emale"><br>
+		Female:<input type="radio" name="gender" value="female"id="efemale"><br>
+		<button id="btnupdate" >update</button>	
+	</div>
+
+
+
+	<h3>Student Table</h3>
+
+	<table border="1" cellpadding="="5>
+		<thead>
+			<th>No</th>
+			<th>Name</th>
+			<th>Age</th>
+			<th>Adress</th>
+			<th>Email</th>
+			<th>Gender</th>	
+			<th>Action</th>
+
+			<tbody id="mytbody">
+				
+			</tbody>
+		</thead>
+	</table>
+</div>
+</body>
+</html>

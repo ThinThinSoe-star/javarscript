@@ -1,0 +1,374 @@
+Skip to content
+Why GitHub? 
+Team
+Enterprise
+Explore 
+Marketplace
+Pricing 
+Search
+
+Sign in
+Sign up
+minpikemhmu
+/
+shop
+100
+Code
+Issues
+Pull requests
+Actions
+Projects
+Security
+Insights
+second
+
+ master
+@minpikemhmu
+minpikemhmu committed 44 seconds ago 
+1 parent d693687 commit 34a4889117969bf802182fd1208bc0e43c6b9b40
+Showing  with 289 additions and 2 deletions.
+ 100  index.html 
+@@ -78,11 +78,13 @@ <h1 align="center" style="display: inline;">My cart</h1>
+<script type="text/javascript">
+	$(document).ready(function(){
+		showdata();
+		noti();
+		$(".addtocart").click(function(){
+			var id=$(this).data("id");
+			var name=$(this).data("name");
+			var photo=$(this).data("photo");
+			var price=$(this).data("price");
+			var status=false;
+
+			var item={
+				id:id,
+@@ -103,11 +105,26 @@ <h1 align="center" style="display: inline;">My cart</h1>
+				itemArray=JSON.parse(itemlist);
+			}
+
+			itemArray.push(item);
+			//console.log(itemArray);
+
+
+			itemArray.forEach( function(v, i) {
+				// statements
+				if(id==v.id){
+					v.qty++;
+					status=true;
+				}
+			});
+
+			if(status==false){
+				itemArray.push(item);
+			}
+
+			var itemstring=JSON.stringify(itemArray);
+
+			localStorage.setItem("item", itemstring);
+			showdata();
+			noti();
+		})
+
+
+@@ -129,7 +146,7 @@ <h1 align="center" style="display: inline;">My cart</h1>
+					<td>${j++}</td>
+					<td>${v.name}</td>
+					<td><img src="${v.photo}" width="100" height="100"/></td>
+					<td>${v.qty}</td>
+					<td><button class="btnincrease" data-id="${i}">+</button>${v.qty}<button class="btndecrese" data-id="${i}">-</button></td>
+					<td>${v.price}</td>
+					<td>${subtotal}</td>
+					</tr>`
+@@ -143,6 +160,85 @@ <h1 align="center" style="display: inline;">My cart</h1>
+				$("#mytbody").html(html);
+			}
+		}
+
+
+		function noti(){
+
+			var itemlist=localStorage.getItem("item");
+
+			if(itemlist){
+				var itemArray=JSON.parse(itemlist);
+				var totalcount=0;
+				itemArray.forEach( function(v, i) {
+					// statements
+					totalcount+=v.qty;
+				});
+				//console.log(totalcount);
+				$("#cart").html(totalcount);
+			}
+		}
+
+
+		$("#mytbody").on('click','.btnincrease',function(){
+			//alert("ok");
+			var id=$(this).data("id");
+
+			var itemlist=localStorage.getItem("item");
+
+			if(itemlist){
+				var itemArray=JSON.parse(itemlist);
+
+				itemArray.forEach( function(v, i) {
+					if(i==id){
+						v.qty++
+					}
+				});
+			var itemstring=JSON.stringify(itemArray);
+
+			localStorage.setItem("item",itemstring);
+			showdata();
+			noti();
+			}
+		})
+
+		$("#mytbody").on('click','.btndecrese',function(){
+			//alert("ok");
+			var id=$(this).data("id");
+
+			var itemlist=localStorage.getItem("item");
+
+			if(itemlist){
+				var itemArray=JSON.parse(itemlist);
+
+				itemArray.forEach( function(v, i) {
+					if(i==id){
+						v.qty--;
+						if(v.qty==0){
+							itemArray.splice(id,1);
+						}
+					}
+				});
+			var itemstring=JSON.stringify(itemArray);
+
+			localStorage.setItem("item",itemstring);
+			showdata();
+			noti();
+			}
+		})
+
+
+		$(".checkout").click(function(){
+			var itemlist=localStorage.getItem("item");
+			if(itemlist!=null){
+				var ans=confirm("Are you sure to checkout");
+				if(ans){
+				localStorage.clear();
+				$("#tbody").html();
+				}
+			}
+
+		})
+
+	})
+</script>
+
+ 191  studentregister.html 
+@@ -0,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Student Register</title>
+	<script type="text/javascript" src="jquery.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			getdata();
+
+			$("#divedit").hide();
+
+			$("#btnregister").click(function(){
+				var name=$("#name").val();
+				var age=$("#age").val();
+				var address=$("#address").val();
+				var gender=$("input[name='gender']:checked").val();
+
+				var student={
+					name:name,
+					age:age,
+					address:address,
+					gender:gender,
+				}
+				//console.log(student);
+				var studentlist=localStorage.getItem("student");
+				//console.log(studentlist);
+
+				var mystudentArray;
+				if(studentlist==null){
+					mystudentArray=[];
+				}else{
+					mystudentArray=JSON.parse(studentlist);
+				}
+				mystudentArray.push(student);
+				//console.log(mystudentArray);
+				//localStorage ka string only 
+				var stringstudent=JSON.stringify(mystudentArray);
+				//console.log(stringstudent);
+				localStorage.setItem("student",stringstudent);
+				getdata();
+			})
+
+
+			function getdata(){
+				var studentlist=localStorage.getItem("student");
+				//console.log(studentlist)
+				if(studentlist){
+					var mystudentArray=JSON.parse(studentlist);
+					//console.log(mystudentArray);
+					var html="";
+					var j=1;
+					mystudentArray.forEach( function(v, i) {
+						// statements
+						html+=`
+						<tr>
+						<td>${j++}</td>
+						<td>${v.name}</td>
+						<td>${v.age}</td>
+						<td>${v.address}</td>
+						<td>${v.gender}</td>
+						<td>
+						<button class="btndelete" data-id="${i}">Delete</button>
+						<button class="btnedit" data-id="${i}">Edit</button>
+						</td>
+						</tr>
+						`
+					});
+					$("#mytbody").html(html);
+				}
+			}
+
+
+
+			$("#mytbody").on('click','.btndelete',function(){
+				//alert("ok");
+				var id=$(this).data('id');
+				//console.log(id);
+				var studentlist=localStorage.getItem("student");
+
+				if(studentlist){
+					var mystudentArray=JSON.parse(studentlist);
+					//console.log(mystudentArray[id]);
+					mystudentArray.splice(id, 1);
+					var stringstudent=JSON.stringify(mystudentArray);
+					localStorage.setItem("student", stringstudent);
+					getdata();
+				}
+			})
+
+
+			$("#mytbody").on('click','.btnedit',function(){
+				$("#divregister").hide();
+				$("#divedit").show();
+				var id=$(this).data('id');
+				//console.log(id);
+				var studentlist=localStorage.getItem("student");
+				if(studentlist){
+					var mystudentArray=JSON.parse(studentlist);
+					var mystudent=mystudentArray[id];
+					$("#eid").val(id);
+					$("#ename").val(mystudent.name)
+					$("#eage").val(mystudent.age)
+					$("#eaddress").val(mystudent.address)
+
+					var gender=mystudent.gender;
+
+					if(gender=="male"){
+						$("#emale").prop("checked","checked");
+					}else{
+						$("#efemale").prop("checked","checked");
+					}
+
+
+				}
+			})
+
+
+			$("#btnupdate").click(function(){
+				var id=$("#eid").val();
+				var name=$("#ename").val();
+				var age=$("#eage").val();
+				var address=$("#eaddress").val();
+				var gender=$("input[name='gender']:checked").val();
+
+				var student={
+					name:name,
+					age:age,
+					address:address,
+					gender:gender,
+				}
+				console.log(student);
+				//console.log(student);
+				var studentlist=localStorage.getItem("student");
+				if(studentlist){
+					var mystudentArray=JSON.parse(studentlist);
+					mystudentArray[id]=student;
+					var stringstudent=JSON.stringify(mystudentArray);
+					localStorage.setItem("student", stringstudent);
+					getdata();
+				}
+			})
+
+		})
+	</script>
+</head>
+<body>
+<!-- Register form -->
+<div id="divregister">
+	<h1>Register Form</h1>
+	Name:<input type="text" name="" id="name"><br>
+	Age:<input type="text" name="" id="age"><br>
+	Address:<input type="text" name="" id="address"><br>
+	Gender:<br>
+	Male:<input type="radio" name="gender" value="male">
+	Female:<input type="radio" name="gender" value="female"><br>
+
+	<button id="btnregister">Register</button>
+</div>
+
+<!-- edit form -->
+<div id="divedit">
+	<h1>Edit Form</h1>
+	<input type="hidden" name="id" id="eid">
+	Name:<input type="text" name="" id="ename"><br>
+	Age:<input type="text" name="" id="eage"><br>
+	Address:<input type="text" name="" id="eaddress"><br>
+	Gender:<br>
+	Male:<input type="radio" name="gender" value="male" id="emale">
+	Female:<input type="radio" name="gender" value="female" id="efemale"><br>
+
+	<button id="btnupdate">update</button>
+</div>
+
+	<div>
+		<h3>Student Table</h3>
+		<table border="1" cellpadding="5">
+			<thead>
+				<th>No</th>
+				<th>Name</th>
+				<th>Age</th>
+				<th>Address</th>
+				<th>Gender</th>
+				<th>action</th>
+			</thead>
+			<tbody id="mytbody">
+
+			</tbody>
+		</table>
+	</div>
+</body>
+</html> 
+<!-- 0 comments on commit 34a4889
+Please sign in to comment.
+© 2021 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Help
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About -->

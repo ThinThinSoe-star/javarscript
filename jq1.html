@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>JQuery</title>
+	<script type="text/javascript" src="jquery.min.js"></script>
+</head>
+<body>
+<!-- <script type="text/javascript">
+	$(document).ready(function(){
+
+		alert("ok");
+
+	})
+</script> -->
+
+<h4 id="myname"></h4>
+Enter your name:<input type="text" name="" class="name"><br>
+<button id="btn">Show</button>
+<script type="text/javascript" >
+	
+$(document).ready(function(){
+$("#btn").click(function(){
+  
+
+  var name=$(".name").val();
+  //console.log(name);
+
+$("#myname").html("Welcome"+name)
+
+
+})
+      
+
+
+})
+
+
+
+
+
+</script>
+</body>
+</html>

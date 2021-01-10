@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Assignment one</title>
+
+</head>
+<body>
+  First Number:<input type="text" name="num1"id="num1"><br>
+  Second Number:<input type="text" name="num2"id="num2"><br>
+<p class="myresult"></p>
+<button onclick="sum()">Sum</button>
+<button onclick="sub()">Sub</button>
+<button onclick="Multi()">Multi</button>
+<button onclick="Divide()">Divide</button>
+<button onclick="Remainder()">Remainder</button>
+<script type="text/javascript">
+	function sum(){
+
+		//var first_num=document.getElementbyId("num1").value;
+		var first_num=document.querySelector("#num1").value;
+		var second_num=document.querySelector("#num2").value;
+		//console.log(Number(first_num)+Number(second_num));
+		var sum=(Number(first_num)+Number(second_num));
+		document.querySelector(".myresult").innerText=sum;
+	}
+function sub(){
+
+var first_num=document.querySelector("#num1").value;
+var second_num=document.querySelector("#num2").value;
+var sub=(Number(first_num)-Number(second_num));
+document.querySelector(".myresult").innerText=sub;
+}
+function Multi(){
+
+var first_num=document.querySelector("#num1").value;
+var second_num=document.querySelector("#num2").value;
+var Multi=(Number(first_num)*Number(second_num));
+document.querySelector(".myresult").innerText=Multi;
+}
+function Divide(){
+
+var first_num=document.querySelector("#num1").value;
+var second_num=document.querySelector("#num2").value;
+var Divide=(Number(first_num)/Number(second_num));
+document.querySelector(".myresult").innerText=Divide;
+}
+function Remainder(){
+
+var first_num=document.querySelector("#num1").value;
+var second_num=document.querySelector("#num2").value;
+var Remainder=(Number(first_num)%Number(second_num));
+document.querySelector(".myresult").innerText=Remainder;
+}
+
+
+</script>
+</body>
+</html>

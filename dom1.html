@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>DOM</title>
+</head>
+<body>
+
+<h1>JS DOM</h1>
+<p>JS<b>DOM</b>is funny</p>
+<p class="myp">JS<b>DOM</b>is funny</p>
+<p class="myp"></p>
+<button onclick="show()">Show</button>
+<button onclick="tag()">Show tag</button>
+
+<script type="text/javascript">
+	function show(){
+		var myp=document.getElementByClassName("myp");
+		//console.log(myp[0]);
+		myp[0].style.color="red";
+		myp[1].innerHTML=myp[0].innerHTML;
+
+	}
+	function tag(){
+		var mytags=document.getElementByTagName("p");
+		//console.log(mytags);
+		mytags[2].innerHTML=mytags[0].innerHTML;
+	}
+</script>
+<img src="download1.jpg" width="200" height="100" id="myimg" onmouseover="big()" onmouseout="normal()">
+<script type="text/javascript">
+	function big(){
+		var myimg=document.getElementById("myimg");
+		myimg.setAttribute("width",'250');
+		myimg.setAttribute("height",'200');
+
+
+	}
+
+
+</script>
+</body>
+</html>
+
+
+
+<!-- <!DOCTYPE html>
+<html>
+<head>
+	<title>DOM 1</title>
+</head>
+<body>
+	<h1>JS DOM</h1>
+	<p>JS <b>DOM</b> is funny</p>
+	<p class="myp">JS <b>DOM is funny</b></p>
+	<p class="myp"></p>
+	<button onclick="show()">show</button>
+
+	<script type="text/javascript">
+		function show(){
+			var myPara = document.getElementsByClassName('myp');
+			console.log(myPara);
+			myPara[0].style.color = "red";
+		}
+	</script>
+</body>
+</html> -->

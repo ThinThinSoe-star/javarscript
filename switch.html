@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Swich</title>
+</head>
+<body>
+<p id="demo"></p>
+<script type="text/javascript">
+	var day;
+	var today=new Date().getDay();//1 =monday,2=tuesday,0 sunday
+	 console.log(today);
+
+	// switch(today){
+	//  	case 1; 
+	//  	day="Today is Monday";
+	//  	break;
+
+	//  	case 2; 
+	//  	day="Today is Tuesday";
+	//  	break;
+
+	//  	case 2;
+	//  	 day="Today is Wed";
+	//  	break;
+
+	//  	default:
+	//  	day="Today is Sat";
+	//  }
+
+	switch(today){
+
+		default:
+		day="Looking for to the Weekend";
+		break;
+
+		case 4:
+		case 5;
+		day="Soon it Weekend";
+
+		case 0:
+		case 6;
+		day="Soon it Weekend";
+
+
+
+	}
+	document.getElementById("demo").innerHTML=day;
+
+
+</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>DOM</title>
+	
+	
+</head>
+<body>
+
+<p id="p1">Select a color and press button ti change text color</p>
+<select id="selector">
+	<option>black</option>
+	<option>yellow</option>
+	<option>red</option>
+	<option>green</option>
+</select>
+<button onclick="colorfun()">click to change color</button>
+<script type="text/javascript">
+		function colorfun(){
+			var mycolor=document.getElementById("selector").value;
+			console.log(mycolor);
+
+			switch(mycolor){
+				case 'black':
+					document.getElementById("p1").style.color='black';
+				break;
+				case 'yellow':
+					document.getElementById("p1").style.color='yellow';
+				break;
+				case 'red':
+					document.getElementById("p1").style.color='red';
+				break;
+				default:
+					document.getElementById("p1").style.color='green';
+				break;
+
+			}
+		}
+			</script>
+</body>
+</html>

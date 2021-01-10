@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Function</title>
+</head>
+<body>
+
+<script type="text/javascript">
+	function show(name){
+
+		console.log(name+"How are you");
+	}
+
+    show("mg mg");
+//(n1,n2=6,n3=7) default par yin htae lo ya 
+    function average(n1,n2,n3){
+    	var num=(n1+n2+n3)/3;
+    	console.log(num);
+    }
+//average(2);
+average(2,3,4);
+
+//Problem//namelessfunction//return par yin **variable** pnae la ki ya mal//
+var x=function(a,b){
+	return a+b;
+}
+
+var sum=x(2,3);
+console.log(sum)
+
+
+
+//problem//arrow function//latest //
+var add=(a,b)=>{return a+b};
+var mysum=add(2,3);
+console.log(mysum);
+
+
+//problem//call backfunction
+                    //2
+function functionOne(x){
+	     //2
+	alert(x);
+}
+
+function functionTwo(var1,callback){
+	//functionone(2);
+       callback(var1);
+}
+functionTwo(2,functionOne);
+
+//higher order function//two return
+function add(a){
+	return function(b){
+		return a+b;
+	}
+}
+let two=add(2);
+two(5);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+
+
+
+
+
+
+</body>
+</html>

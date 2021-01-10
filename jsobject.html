@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>JavaScript Object</title>
+</head>
+<body>
+	<table border="1" cellpadding="10">
+		<thead>
+			<th>No</th>
+			<th>Name</th>
+			<th>age</th>
+			<th>Address</th>
+
+		</thead>
+		<tbody id="mylist">
+			
+		</tbody>
+	</table>
+
+<script type="text/javascript">
+//const student so yi change ma ya but student.name so yin ya tal	
+ var student={
+// //key:value
+name:"mg mg",
+address:"ygn",
+age:"23",
+showinfo:function(){
+	return this.name+ "is"+this.age+"years old and live in" +this.address;
+}
+}
+// //student.name="aung aung"
+// //console.log(student["name"])
+// console.log(student.address);
+// console.log(student.age);
+// console.log(student.showinfo(address));
+
+
+///Problem2
+var mystudent=[];
+var student1={
+name:"mg mg",
+address:"ygn",
+age:"23",
+};
+var student2={
+name:"ma ma",
+address:"mdy",
+age:"25",
+};
+var student3={
+name:"aung",
+address:"ygn",
+age:"28",
+};
+
+mystudent.push(student1);
+mystudent.push(student2);
+mystudent.push(student3);
+
+console.log(mystudent);
+var html="";
+var j=1;
+mystudent.forEach(function(v,i){
+
+html+=`<tr>
+<td>${j++}</td>
+<td>${v.name}</td>
+<td>${v.age}</td>
+<td>${v.address}</td>
+
+
+</tr>
+`
+});
+ 
+//console.log(html);
+document.getElementById("mylist").innerHTML=html;
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title> ForEach</title>
+</head>
+<body>
+
+<h1>Today todo list</h1>
+
+<p id="todo"></p>
+<script type="text/javascript">
+	var todolist=["to study J language","to do assignment","to ettend online"];
+	var	list="";
+
+	list+="<ul>";
+
+								//(v,i)
+	todolist.forEach( function(element, index){
+					//v
+	list+="<li>"+element+"</li>";
+
+});
+
+
+	list+="</ul>";
+	console.log(list);
+	document.getElementById("todo").innerHTML=list;
+
+
+</script>
+
+</body>
+</html>

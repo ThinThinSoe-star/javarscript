@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Shop</title>
+	<style type="text/css">
+		.myshop{
+			float: left;
+			margin-left: 40px;
+		}
+		.shop{
+			float: left;
+		}
+		.clear{
+			clear: both;
+		}
+		.mycart{
+			float: right;
+			margin-right: 50px;
+		}
+		#cart{
+			position: absolute;
+		}
+		#imgg{
+			position: relative;
+			margin-left: 50px;
+		}
+		
+	</style>
+	<script type="text/javascript" src="jquery.min.js"></script>
+</head>
+<body>
+<div class="shop">
+	<h1 align="center">My Shop</h1>
+	<div class="myshop">
+		<img src="1.jpg" width="100px" height="100px"><br>
+		<p>Jdonuts</p>
+		<p>price:5000kyats</p><br>
+		<button class="addtocart" data-id="1" data-name="Jdonuts" data-photo="1.jpg" data-price="5000">Add to cart</button>
+	</div>
+
+	<div class="myshop">
+		<img src="2.jpg" width="100px" height="100px"><br>
+		<p>Bread</p>
+		<p>price:2500kyats</p><br>
+		<button class="addtocart" data-id="2" data-name="Bread" data-photo="2.jpg" data-price="2500" >Add to cart</button>
+	</div>
+
+	<div class="myshop">
+		<img src="3.jpg" width="100px" height="100px"><br>
+		<p>Humbagar</p>
+		<p>price:3000kyats</p><br>
+		<button class="addtocart"  data-id="3" data-name="Humbagar" data-photo="3.jpg" data-price="3000">Add to cart</button>
+	</div>
+	<div class="myshop">
+		<img src="download.jpg" width="100px" height="100px"><br>
+		<p>Piza</p>
+		<p>price:3000kyats</p><br>
+		<button class="addtocart"  data-id="download.jpg" data-name="Piza" data-photo="download.jpg" data-price="3000">Add to cart</button>
+	</div>
+	<div class="clear"></div>
+	</div>
+
+<div class="mycart">
+	<h1 align="center" style="display: inline;">My cart</h1>
+	<img src="cart1.png" width="50px" height="50px" id="imgg" ><span color="red" id="cart">3</span>
+
+	<table border="1" cellpadding="20px" style="margin-top: 30px">
+		<thead>
+			<th>No</th>
+			<th>Name</th>
+			<th>photo</th>
+			<th>qty</th>
+			<th>price</th>
+			<th>Subtotal</th>
+		</thead>
+		<tbody id="mytbody">
+			
+		</tbody>
+	</table>
+	<button class="checkout">Check out</button>
+	
+</div>
+<script type="text/javascript">
+	$(document).ready(function(){
+		showdata();
+		noti();
+		$(".addtocart").click(function(){
+			var id=$(this).data("id");
+			var name=$(this).data("name");
+			var photo=$(this).data("photo");
+			var price=$(this).data("price");
+			var status=false;
+
+			var item={
+				id:id,
+<h1 align="center" style="display: inline;">My cart</h1>
+				itemArray=JSON.parse(itemlist);
+			}
+
+			itemArray.push(item);
+			//console.log(itemArray);
+
+
+			itemArray.forEach( function(v, i) {
+				// statements
+				if(id==v.id){
+					v.qty++;
+					status=true;
+				}
+			});
+
+			if(status==false){
+				itemArray.push(item);
+			}
+
+			var itemstring=JSON.stringify(itemArray);
+
+			localStorage.setItem("item", itemstring);
+			showdata();
+			noti();
+		})
+
+
+			<h1 align="center" style="display: inline;">My cart</h1>
+					<td>${j++}</td>
+					<td>${v.name}</td>
+					<td><img src="${v.photo}" width="100" height="100"/></td>
+					<td>${v.qty}</td>
+					<td><button class="btnincrease" data-id="${i}">+</button>${v.qty}<button class="btndecrese" data-id="${i}">-</button></td>
+					<td>${v.price}</td>
+					<td>${subtotal}</td>
+					</tr>`
+				<h1 align="center" style="display: inline;">My cart</h1>
+				$("#mytbody").html(html);
+			}
+		}
+
+
+		function noti(){
+
+			var itemlist=localStorage.getItem("item");
+
+			if(itemlist){
+				var itemArray=JSON.parse(itemlist);
+				var totalcount=0;
+				itemArray.forEach( function(v, i) {
+					// statements
+					totalcount+=v.qty;
+				});
+				//console.log(totalcount);
+				$("#cart").html(totalcount);
+			}
+		}
+
+
+		$("#mytbody").on('click','.btnincrease',function(){
+			//alert("ok");
+			var id=$(this).data("id");
+
+			var itemlist=localStorage.getItem("item");
+
+			if(itemlist){
+				var itemArray=JSON.parse(itemlist);
+
+				itemArray.forEach( function(v, i) {
+					if(i==id){
+						v.qty++
+					}
+				});
+			var itemstring=JSON.stringify(itemArray);
+
+			localStorage.setItem("item",itemstring);
+			showdata();
+			noti();
+			}
+		})
+
+		$("#mytbody").on('click','.btndecrese',function(){
+			//alert("ok");
+			var id=$(this).data("id");
+
+			var itemlist=localStorage.getItem("item");
+
+			if(itemlist){
+				var itemArray=JSON.parse(itemlist);
+
+				itemArray.forEach( function(v, i) {
+					if(i==id){
+						v.qty--;
+						if(v.qty==0){
+							itemArray.splice(id,1);
+						}
+					}
+				});
+			var itemstring=JSON.stringify(itemArray);
+
+			localStorage.setItem("item",itemstring);
+			showdata();
+			noti();
+			}
+		})
+
+
+		$(".checkout").click(function(){
+			var itemlist=localStorage.getItem("item");
+			if(itemlist!=null){
+				var ans=confirm("Are you sure to checkout");
+				if(ans){
+				localStorage.clear();
+				$("#tbody").html();
+				}
+			}
+
+		})
+
+	})
+</script>

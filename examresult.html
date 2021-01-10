@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Exam Result</title>
+</head>
+<body>
+Myanmar:<input type="text" name="" id="myan"><br>
+Eng:<input type="text" name="" id="eng"><br>
+Mat:<input type="text" name="" id="math"><br>
+
+
+<button  onclick="check()">Result</button>
+<script type="text/javascript">
+	
+	function check(){
+
+		var Myanmar=Number(document.getElementById("myan").value);
+		var Eng=Number(document.getElementById("eng").value);
+		var Mat=Number(document.getElementById("math").value);
+
+		//console.log(Myanmar+""+Eng+""+ Mat);
+		if(Myanmar>=40 && Eng>=40 && Mat>=40){
+
+			if (Myanmar>=80 || Eng>=80 || Mat>=80){
+				console.log("exam is pass with D");
+
+			}
+			console.log("exam is pass");
+		}else{
+			console.log("exam is fail");
+		}
+
+	}
+</script>
+
+
+
+</body>
+</html>

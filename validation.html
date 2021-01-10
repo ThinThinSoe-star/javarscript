@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Validation</title>
+</head>
+<body>
+Email:<input type="text" name="" id="email"><br>
+password:<input type="text" name="" id="psw"><br>
+Confirm Password:<input type="text" name="" id="cpsw"><br>
+
+
+<button onclick="check()">Save</button>
+<script type="text/javascript">
+	function check(){
+
+		var psw=document.querySelector("#psw").value;
+		var cpsw=document.querySelector("#cpsw").value;
+
+		if(psw==cpsw){
+			alert("register success")
+
+		}else{
+			alert("password and confirmpassword are not match");
+		}
+	}
+
+</script>
+
+</body>
+</html>

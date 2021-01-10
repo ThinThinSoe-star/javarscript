@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>JQ</title>
+	<script type="text/javascript" src="jquery.min.js"></script>
+</head>
+<body>
+
+	<img src="download1.jpg" width="200" height="200" id="myimg">
+	<script type="text/javascript" >	
+		$(document).ready(function(){
+
+			$("#myimg").click(function(){
+
+	//var width=$("#myimg").attr("width");
+	// console.log("width");
+
+				$(this).attr("width","500px");
+					$(this).attr("height","500px");
+
+						})
+	</script>
+
+
+</body>
+</html>

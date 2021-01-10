@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>JQ</title>
+	<script type="text/javascript" src="jquery.min.js"></script>
+</head>
+<body>
+
+
+<h3>Stud Reg Form</h3>
+Enter your name:<input type="text" name="" id="name"><br>
+Enter your name:<input type="text" name="" id="address"><br>
+<button id="register">Register</button>
+
+<h3>Stud Table</h3>
+<table border="1" cellpadding="5">
+	<thead>
+	<th>Name</th>	
+	<th>Adress</th>
+	</thead>
+	<tbody>		
+	</tbody>
+</table>
+
+<script type="text/javascript" >	
+$(document).ready(function(){
+
+$("#register").click(function(){
+  
+var name=$("#name").val();
+var name=$("#address").val();
+var html="";
+html+=`<tr>
+<td>${name}</td>
+<td>${address}</td>
+</tr>`
+
+//console.log(html)
+$("tbody").append(html);
+
+})
+})
+</script>
+</body>
+</html>
+
+
